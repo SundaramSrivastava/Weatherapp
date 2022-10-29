@@ -4,11 +4,6 @@
 Weather app brings the weather information about user's current location and also have capabilities to check weather information about any other location.
 
 
-# Weather App
-
-Weather app brings the weather information about user's current location and also have capabilities to check weather information about any other location.
-
-
 ## Run Locally
 
 Clone the project
