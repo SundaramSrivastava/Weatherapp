@@ -19,7 +19,6 @@ function ChangeCity({navigation}) {
      `http://52.73.146.184:3000/api/app/user/get-city-list?page=${currentPage}&search=${textValue}`,
    ).then(data => {
      return data.json()
-    
    })
    .then(data => {
      console.log(data);
@@ -27,7 +26,7 @@ function ChangeCity({navigation}) {
      setCityList(city);
    })
    .catch(err => {
-     alert("Some network error occured")
+     alert(err)
    })
  };
  
@@ -47,18 +46,20 @@ function ChangeCity({navigation}) {
        </TouchableOpacity>
        <Text style={{fontSize: 30, fontWeight: 'bold', color: '#000'}}>Change City</Text>
      </View>
-     <View>
+     <View >
        <TextInput
          value={textValue}
          onChangeText={value => {
            setTextValue(value);
          }}
-         style={{borderColor: '#65cdff', borderWidth: 1, borderRadius: 10, backgroundColor: '#fff'}}
+         style={{borderColor: '#65cdff', borderWidth: 1, borderRadius: 10, backgroundColor: '#fff', color: '#000'}}
        />
+       <View style={{height: height-200}}>
        <VirtualizedList
        data={cityList}
-       contentContainerStyle={{paddingHorizontal: 10,}}
+       // contentContainerStyle={{paddingHorizontal: 10, maxHeight: height-10}}
        initialNumToRender={7}
+       showsVerticalScrollIndicator={true}
        renderItem={({ item }) => {
            return(
                <TouchableOpacity style={{ borderBottomColor: '#000', borderBottomWidth: 1, paddingBottom: 10, marginTop: 10}} onPress={() => {
@@ -81,15 +82,16 @@ function ChangeCity({navigation}) {
            setCurrentPage(currentPage+1)
            fetchCity()
        }}
-       keyExtractor={item => {item.name + item.country}}
+       keyExtractor={(item,index) => {item.name + item.country+index}}
        getItemCount={(data) => data.length}
        getItem={(item, index) => {
            return item[index]
        }}
        scrollEnabled={true}
-       bounces={true}
+       // bounces={true}
        // onEndReached={setCurrentPage(currentPage+1)}
        />
+       </View>
      </View>
      {console.log('cittyyy', cityList)}
    </View>
@@ -98,3 +100,5 @@ function ChangeCity({navigation}) {
  
 export default ChangeCity;
  
+ 
+
